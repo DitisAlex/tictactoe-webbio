@@ -1,0 +1,21 @@
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.box {
+    font-size: 4em;
+    text-align: center;
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 6rem);
+}
