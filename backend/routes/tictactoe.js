@@ -1,9 +1,18 @@
 const express = require("express");
 const router = express.Router();
 
-//Return all items
-router.get('/', function (req, res) {
+const Data = require("../models/Data");
+
+//Test
+router.get('/test', function (req, res) {
     res.send('hello world')
 })
+
+//Return all data
+router.get('/', async function (req, res) {
+    const result = await Data.find({})
+    res.send(result);
+})
+
 
 module.exports = router;

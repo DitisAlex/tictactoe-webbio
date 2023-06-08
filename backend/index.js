@@ -16,11 +16,12 @@ app.options("*", cors({ origin: true, credentials: true }));
 app.use("/api/tictactoe", require("./routes/tictactoe"))
 
 // Initialize port
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-  });
-// app.listen(port, () => mongoose.connect(
-//   dbUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
-//     console.log(`Database connection established`)
-//   }
-// ));
+// app.listen(port, () => {
+//     console.log(`Example app listening at http://localhost:${port}`);
+//   });
+
+app.listen(port, () => mongoose.connect(dbUrl), {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+  })
