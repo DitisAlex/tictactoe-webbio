@@ -30,7 +30,11 @@ export default function App() {
 
       setBoardValues(newBoardValues);
       updateCurrentTurn();
-      determineWinner(newBoardValues);
+
+      newBoardValues.map((key) => {
+        if(key === "")  determineWinner(newBoardValues);
+        else if (newBoardValues.every(value => value !== "")) setWinner("draw");
+      })
     }
   };
 
@@ -55,11 +59,7 @@ export default function App() {
 
   return (
     <div className="wrapper">
-      {winner ? (
-        <h1>Winner: {winner}</h1>
-      ) : (
-        <h1>Current Turn: {currentTurn}</h1>
-      )}
+      {winner ? (winner !== "draw" ? <h1>{winner} won!</h1> : <h1>Draw!</h1>) : <h1>Current turn: {currentTurn}</h1>}
       <Board board={boardValues} onClick={winner ? resetBoard : onBoxClick} />
     </div>
   );

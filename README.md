@@ -43,3 +43,7 @@ Om de winnaar te bepalen zou ik het simpelweg hard coded kunnen doen, door alle 
 Een probleem dat ik tegen ben gekomen is dat wanneer ik door mijn possibilities loop, alleen index[0] wordt teruggegeven. Hierdoor kun je alleen winnen wanneer de top row gevuld is. Dit heb ik opgelost door een .map te gebruiken ipv een for loop.
 
 Nu ik succesvol de winnaar heb kunnen bepalen, doormiddel van een loop die controleert of het huidige bord voldoet aan een van win conditions, moet ik het spel gaan beindigen. Dit doe ik door een boolean bij te houden of er een winnaar is of niet. Zodra er een winnaar is wordt dit op het scherm getoond en wordt bij de volgende klik op het bord het spel gereset.
+
+Nu moet ik nog detecteren wanneer het gelijkspel is. Dit kan ik doen door te controleren of er geen keys meer in de array zijn met de value "". Een andere alternatief zou kunnen zijn om de hoeveelheid zetten bij te houden. 
+
+Aangezien ik al conditional rendering had voor het tonen van de winnaar, wil ik dit ook toepassen voor een gelijkspel. Oftewel de conditional rendering met 3 conditions controleren.
