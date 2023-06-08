@@ -47,3 +47,8 @@ Nu ik succesvol de winnaar heb kunnen bepalen, doormiddel van een loop die contr
 Nu moet ik nog detecteren wanneer het gelijkspel is. Dit kan ik doen door te controleren of er geen keys meer in de array zijn met de value "". Een andere alternatief zou kunnen zijn om de hoeveelheid zetten bij te houden. 
 
 Aangezien ik al conditional rendering had voor het tonen van de winnaar, wil ik dit ook toepassen voor een gelijkspel. Oftewel de conditional rendering met 3 conditions controleren.
+
+### Probleem #4 - Back-End
+Voor de back-end heb ik gekozen voor een simpele node & express REST api, dat verbonden is met een cloud mongodb server. 
+
+De data die ik wil opslaan is de winnaar en de array die het huidige bord bijhoudt. Dit lijkt mij persoonlijk de meest nuttige data om aan een toekomste machine learning model te geven.
