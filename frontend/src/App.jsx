@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
-
 import { Board } from "./components/Board.jsx";
+import axios from "axios";
 
 export default function App() {
   const POSSIBILITIES = [
@@ -16,10 +16,15 @@ export default function App() {
   ];
 
   const DEFAULT_BOARD = Array(9).fill("");
+  const API_URL = "http://localhost:4000/api/tictactoe/";
 
   const [boardValues, setBoardValues] = useState(DEFAULT_BOARD);
   const [currentTurn, setCurrentTurn] = useState("X");
   const [winner, setWinner] = useState(null);
+
+  useEffect(() => {
+    if (winner) submitResults(winner, boardValues);
+  }, [winner]);
 
   const onBoxClick = (targetIndex) => {
     if (boardValues[targetIndex] === "") {
@@ -32,9 +37,11 @@ export default function App() {
       updateCurrentTurn();
 
       newBoardValues.map((key) => {
-        if(key === "")  determineWinner(newBoardValues);
-        else if (newBoardValues.every(value => value !== "")) setWinner("draw");
-      })
+        if (key === "") determineWinner(newBoardValues);
+        else if (newBoardValues.every((value) => value !== "")) {
+          setWinner("draw");
+        }
+      });
     }
   };
 
@@ -57,9 +64,39 @@ export default function App() {
     setWinner(null);
   };
 
+  const submitResults = (winner, board) => {
+    axios
+      .post(
+        API_URL,
+        {
+          winner: winner,
+          board: board,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="wrapper">
-      {winner ? (winner !== "draw" ? <h1>{winner} won!</h1> : <h1>Draw!</h1>) : <h1>Current turn: {currentTurn}</h1>}
+      {winner ? (
+        winner !== "draw" ? (
+          <h1>{winner} won!</h1>
+        ) : (
+          <h1>Draw!</h1>
+        )
+      ) : (
+        <h1>Current turn: {currentTurn}</h1>
+      )}
       <Board board={boardValues} onClick={winner ? resetBoard : onBoxClick} />
     </div>
   );

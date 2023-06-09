@@ -1,6 +1,7 @@
 # tictactoe-webbio
 
 Technical Assignment [Webbio] - Tic Tac Toe Data Assembler
+https://tictactoe-webbio.vercel.app/
 
 ## Notes
 
@@ -44,11 +45,16 @@ Een probleem dat ik tegen ben gekomen is dat wanneer ik door mijn possibilities 
 
 Nu ik succesvol de winnaar heb kunnen bepalen, doormiddel van een loop die controleert of het huidige bord voldoet aan een van win conditions, moet ik het spel gaan beindigen. Dit doe ik door een boolean bij te houden of er een winnaar is of niet. Zodra er een winnaar is wordt dit op het scherm getoond en wordt bij de volgende klik op het bord het spel gereset.
 
-Nu moet ik nog detecteren wanneer het gelijkspel is. Dit kan ik doen door te controleren of er geen keys meer in de array zijn met de value "". Een andere alternatief zou kunnen zijn om de hoeveelheid zetten bij te houden. 
+Nu moet ik nog detecteren wanneer het gelijkspel is. Dit kan ik doen door te controleren of er geen keys meer in de array zijn met de value "". Een andere alternatief zou kunnen zijn om de hoeveelheid zetten bij te houden.
 
 Aangezien ik al conditional rendering had voor het tonen van de winnaar, wil ik dit ook toepassen voor een gelijkspel. Oftewel de conditional rendering met 3 conditions controleren.
 
 ### Probleem #4 - Back-End
-Voor de back-end heb ik gekozen voor een simpele node & express REST api, dat verbonden is met een cloud mongodb server. 
 
-De data die ik wil opslaan is de winnaar en de array die het huidige bord bijhoudt. Dit lijkt mij persoonlijk de meest nuttige data om aan een toekomste machine learning model te geven.
+Voor de back-end heb ik gekozen voor een simpele node & express REST api, dat verbonden is met een cloud mongodb server.
+
+De data die ik wil opslaan is de winnaar en de array die het huidige bord bijhoudt. Dit lijkt mij persoonlijk de meest nuttige data om aan een toekomste machine learning model te geven. Hiervoor heb ik als eerst een mongoose schema opgesteld, om ervoor te zorgen dat alle data altijd consistent zal zijn. Daarna heb ik een eenvoudige GET & POST route gemaakt en deze getest in postman. Dit werkte allemaal zonder problemen.
+
+### Probleem #5 - Front-end verbinden met back-end
+
+Hiervoor ben ik van plan om axios te gebruiken de requesten uit te voeren. Echter weet ik niet geheel wat de meest ideale plek is om de request uit te voeren. Oorspronkelijk wou ik het in de determineWinner methode zetten, maar deze wordt meerdere keren gecheckt waardoor de query ook meerdere keren gevuurd wordt. Toen probeerde ik het in de reset methode te zetten, dit werkte prima, maar vond ik eigenlijk niet praktisch. Waarom zou de gebruiker zijn spel moeten resetten om data op te slaan? Hierdoor zou data niet opgeslagen worden als de spelers na een game klaar zijn. Een andere oplossing was een useEffect bij te houden die kijkt wanneer winner gevuld wordt, dit was volgens mij de meest geschikte oplossing.
